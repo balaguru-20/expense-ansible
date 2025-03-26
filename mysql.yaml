@@ -1,11 +1,16 @@
 - name: install mysql server
   hosts: mysql
   become: yes
+  vars:
+    mysql_root_password: ExpenseApp@1
   tasks:
   - name: install MySQL libraries
     ansible.builtin.pip:
-      name: PyMySQL
+      name: "{{ item }}"
       executable: pip3.9
+    loop:
+    - cryptography
+    - PyMySQL
 
   - name: install MySQL server
     ansible.builtin.package:
@@ -21,7 +26,7 @@
   - name: connect to mysql server
     community.mysql.mysql_info:
       login_user: root
-      login_password: ExpenseApp@1
+      login_password: "{{ mysql_root_password }}"
       login_host: mysql.daws82s.space
     register: mysql_info
     ignore_errors: true  #It will ignore the error and execute the rest of the playbook
