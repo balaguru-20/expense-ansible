@@ -24,7 +24,7 @@
       login_password: ExpenseApp@1
       login_host: mysql.daws82s.space
     register: mysql_info
-    ignore_error: true  #It will ignore the error and execute the rest of the playbook
+    ignore_errors: true  #It will ignore the error and execute the rest of the playbook
 
   - name: print the output
     ansible.builtin.debug:
