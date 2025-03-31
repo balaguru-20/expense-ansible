@@ -5,7 +5,7 @@
     mysql_root_password: ExpenseApp@1
   tasks:
   - name: install MySQL libraries
-    ansible.builtin.pip:
+    ansible.builtin.pip:  # To install the libraries
       name: "{{ item }}"
       executable: pip3.9
     loop:
