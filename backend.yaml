@@ -32,3 +32,7 @@
       src: /tmp/backend.zip
       dest: /app
       remote_src: yes # to access remote source/node mechine file
+
+  - name: Install depedencies
+    community.general.npm: #it will goes into the /app folder and install the dependecies by using npm
+      path: /app
