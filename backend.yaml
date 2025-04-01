@@ -3,7 +3,7 @@
   become: yes
   tasks: 
   - name: disable current module
-    ansible.builtin.command: dnf module disable nodejs -y
+    ansible.builtin.command: dnf module disable nodejs -y # In the command module we can directly use linux commands
 
   - name: enable nodejs 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
@@ -12,3 +12,7 @@
     ansible.builtin.package:
       name: nodejs
       state: present
+  
+  - name: create expense user 
+    ansible.builtin.user:
+      name: expense
