@@ -10,8 +10,11 @@
 
   - name: install nodejs
     ansible.builtin.package:
-      name: nodejs
+      name: "{{ item }}"
       state: present
+    loop:
+    - nodejs
+    - mysql
   
   - name: create expense user 
     ansible.builtin.user:
@@ -36,3 +39,16 @@
   - name: Install depedencies
     community.general.npm: #it will goes into the /app folder and install the dependecies by using npm
       path: /app
+
+  - name: copy backend service
+    ansible.builtin.copy:
+      src: backend.service
+      dest: /etc/systemd/system/backend.service
+
+  - name: import mysql data
+    community.mysql.mysql_db:
+      state: import
+      login_user: root
+      login_password: DevOps321
+      login_host: mysql.daws82s.space
+      target: /app/schema/backend.sql
